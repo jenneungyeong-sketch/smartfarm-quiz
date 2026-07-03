@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>스마트팜, 나의 시작 단계는?</title>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --mint:#b8f0d8;--mint2:#7de0b4;--green:#3aaa6e;--dgreen:#1e7a4a;
+  --cream:#fffef5;--brown:#5c3d1e;--gray:#888;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;background:linear-gradient(160deg,#e8faf0 0%,#fff8e1 50%,#fce8f3 100%);font-family:'Nanum Gothic',sans-serif;color:var(--brown)}
+.deco{position:fixed;pointer-events:none;z-index:0;font-size:1.6rem;animation:float 6s ease-in-out infinite;opacity:0.4}
+.deco:nth-child(1){top:6%;left:5%;animation-delay:0s}
+.deco:nth-child(2){top:12%;right:8%;animation-delay:1.5s;font-size:1.2rem}
+.deco:nth-child(3){top:40%;left:3%;animation-delay:3s;font-size:1rem}
+.deco:nth-child(4){top:55%;right:4%;animation-delay:0.8s;font-size:1.4rem}
+.deco:nth-child(5){bottom:18%;left:7%;animation-delay:2s;font-size:1.1rem}
+.deco:nth-child(6){bottom:10%;right:6%;animation-delay:4s;font-size:1.3rem}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-12px) rotate(5deg)}}
+.wrap{position:relative;z-index:1;max-width:420px;margin:0 auto;padding:1.5rem 1.2rem 3rem;min-height:100vh}
+
+/* 인트로 */
+#intro{animation:popIn 0.4s ease}
+.intro-card{background:#fff;border-radius:28px;padding:2rem 1.5rem 1.8rem;box-shadow:0 4px 24px rgba(58,170,110,0.13);text-align:center}
+.intro-emoji-wrap{overflow:hidden;width:100%;margin-bottom:0.3rem}
+.intro-emoji-track{display:flex;width:max-content;animation:slideEmoji 12s linear infinite}
+.intro-emoji-track2{display:flex;width:max-content;animation:slideEmoji2 12s linear infinite}
+.intro-emoji-row{font-size:1.6rem;letter-spacing:0.25rem;white-space:nowrap}
+.intro-emoji-row2{font-size:1.6rem;letter-spacing:0.25rem;white-space:nowrap}
+@keyframes slideEmoji{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes slideEmoji2{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+.intro-main-emoji{font-size:4.5rem;display:block;margin:0.3rem 0 0.6rem;animation:bounceIn 0.6s cubic-bezier(.4,0,.2,1) both}
+.intro-title{font-family:'Gaegu',cursive;font-size:2rem;color:var(--dgreen);line-height:1.3;margin-bottom:0.4rem}
+.intro-subtitle{font-size:13px;color:#aaa;margin-bottom:0.8rem;font-weight:700;letter-spacing:0.05em}
+.intro-divider{width:40px;height:3px;background:linear-gradient(90deg,var(--mint2),var(--green));border-radius:2px;margin:0.6rem auto}
+.intro-sub{font-size:13px;color:#777;line-height:1.8;margin:0.8rem 0 1.5rem}
+.intro-sub strong{color:var(--dgreen)}
+.intro-tags{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:1.4rem}
+.intro-tag{background:#e8faf0;color:var(--dgreen);font-size:12px;font-weight:800;padding:4px 12px;border-radius:20px}
+.btn-start{display:block;width:100%;padding:15px;border-radius:18px;border:none;background:linear-gradient(135deg,var(--mint2),var(--green));color:#fff;font-family:'Nanum Gothic',sans-serif;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 4px 16px rgba(58,170,110,0.35);transition:transform 0.15s;letter-spacing:0.03em}
+.btn-start:hover{transform:translateY(-2px)}
+.intro-footer{margin-top:1rem;font-size:11px;color:#bbb}
+
+/* 퀴즈 */
+.quiz-header{display:none;text-align:center;margin-bottom:0.8rem}
+.quiz-header h2{font-family:'Gaegu',cursive;font-size:1.5rem;color:var(--dgreen);margin-bottom:2px}
+.quiz-header p{font-size:11px;color:#aaa}
+.prog-wrap{margin-bottom:1.2rem}
+.prog-track{background:rgba(0,0,0,0.08);border-radius:10px;height:8px;overflow:hidden}
+.prog-bar{height:8px;border-radius:10px;background:linear-gradient(90deg,var(--mint2),var(--green));transition:width 0.4s cubic-bezier(.4,0,.2,1)}
+.prog-label{font-size:12px;color:var(--gray);text-align:right;margin-top:4px}
+.card{background:#fff;border-radius:24px;padding:1.5rem 1.3rem;box-shadow:0 4px 24px rgba(58,170,110,0.10),0 1px 4px rgba(0,0,0,0.06);margin-bottom:1rem;animation:popIn 0.35s cubic-bezier(.4,0,.2,1)}
+@keyframes popIn{from{opacity:0;transform:translateY(16px) scale(0.97)}to{opacity:1;transform:none}}
+@keyframes bounceIn{0%{transform:scale(0.5);opacity:0}70%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.q-emoji{font-size:2.4rem;display:block;text-align:center;margin-bottom:0.75rem}
+.q-text{font-size:16px;font-weight:700;line-height:1.7;text-align:center;color:var(--brown);margin-bottom:1.1rem;white-space:pre-line}
+.options{display:flex;flex-direction:column;gap:9px}
+.opt{padding:12px 16px;border-radius:16px;border:2px solid transparent;background:var(--cream);font-size:14px;font-weight:700;color:var(--brown);cursor:pointer;text-align:left;transition:all 0.18s;line-height:1.4;outline:none;-webkit-tap-highlight-color:transparent}
+.opt:active,.opt:hover{background:var(--mint);border-color:var(--mint2);transform:translateY(-1px)}
+.opt.picked{background:var(--mint);border-color:var(--green);color:var(--dgreen)}
+.opt-emoji{margin-right:6px}
+
+/* 결과 */
+#result{display:none}
+.result-card{background:#fff;border-radius:28px;padding:2rem 1.5rem 1.5rem;box-shadow:0 8px 32px rgba(58,170,110,0.13);text-align:center;animation:popIn 0.4s cubic-bezier(.4,0,.2,1)}
+.result-character{font-size:5rem;display:block;margin-bottom:0.5rem;animation:bounceIn 0.6s cubic-bezier(.4,0,.2,1) 0.1s both}
+.result-character.anim-sprout{animation:bounceIn 0.6s cubic-bezier(.4,0,.2,1) 0.1s both, sprout 1.8s ease-in-out 0.7s infinite}
+.result-character.anim-search{animation:bounceIn 0.6s cubic-bezier(.4,0,.2,1) 0.1s both, search 1.5s ease-in-out 0.7s infinite}
+.result-character.anim-flex{animation:bounceIn 0.6s cubic-bezier(.4,0,.2,1) 0.1s both, flex 1.2s ease-in-out 0.7s infinite}
+.result-character.anim-rocket{animation:bounceIn 0.6s cubic-bezier(.4,0,.2,1) 0.1s both, rocket 1.4s ease-in-out 0.7s infinite}
+@keyframes sprout{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-8px) scale(1.08)}}
+@keyframes search{0%,100%{transform:rotate(-15deg)}50%{transform:rotate(15deg)}}
+@keyframes flex{0%,100%{transform:scale(1)}40%{transform:scale(1.2)}60%{transform:scale(0.95)}80%{transform:scale(1.1)}}
+@keyframes rocket{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-12px) rotate(5deg)}}
+.result-type-badge{display:inline-block;padding:6px 20px;border-radius:30px;font-size:15px;font-weight:800;margin-bottom:1rem}
+.result-label{font-size:15px;font-weight:800;margin:0.5rem 0 1rem;line-height:1.6;color:var(--brown);white-space:pre-line}
+.result-dna-label{font-size:14px;font-weight:800;color:var(--dgreen);margin-bottom:4px}
+.result-pct{font-family:'Gaegu',cursive;font-size:4rem;font-weight:700;line-height:1;margin-bottom:0.8rem}
+.result-pct span{font-size:1.5rem;font-weight:400}
+.gauge-wrap{margin:0 0 1.2rem}
+.gauge-track{background:rgba(0,0,0,0.07);border-radius:10px;height:14px;overflow:hidden}
+.gauge-fill{height:14px;border-radius:10px;background:linear-gradient(90deg,var(--mint2),var(--green));transition:width 1.2s cubic-bezier(.4,0,.2,1);position:relative}
+.gauge-fill::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);width:18px;height:18px;background:var(--green);border:3px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(58,170,110,0.4)}
+.result-section{background:var(--cream);border-radius:16px;padding:14px 16px;margin-bottom:10px;text-align:left}
+.result-section-title{font-size:12px;font-weight:800;color:#444;margin-bottom:10px;letter-spacing:0.05em}
+.result-section p{font-size:14px;color:#555;line-height:2;white-space:pre-line;font-weight:400}
+.result-rec-box{background:#e8faf0;border-radius:16px;padding:14px 16px;margin-bottom:1.2rem;text-align:left}
+.result-rec-title{font-size:11px;font-weight:800;color:var(--dgreen);margin-bottom:8px;letter-spacing:0.08em}
+.result-rec-name{font-size:14px;font-weight:800;color:var(--dgreen);margin-bottom:6px;line-height:1.5}
+.result-rec-desc{font-size:13px;color:#3a7a50;line-height:1.8;white-space:pre-line}
+.btn-cta{display:block;width:100%;padding:14px;border-radius:16px;border:none;background:var(--green);color:#fff;font-family:'Nanum Gothic',sans-serif;font-size:15px;font-weight:800;cursor:pointer;margin-bottom:8px;transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 4px 14px rgba(58,170,110,0.35);-webkit-tap-highlight-color:transparent}
+.btn-cta:active,.btn-cta:hover{transform:translateY(-2px)}
+.btn-retry{display:block;width:100%;padding:12px;border-radius:16px;border:2px solid var(--mint2);background:transparent;color:var(--green);font-family:'Nanum Gothic',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:background 0.15s;-webkit-tap-highlight-color:transparent}
+.btn-retry:active,.btn-retry:hover{background:var(--mint)}
+.footer-badge{text-align:center;margin-top:1.2rem;font-size:11px;color:#bbb;line-height:1.8}
+.footer-badge strong{color:var(--green)}
+
+/* 완료 */
+#done-screen{display:none}
+.done-card{background:#fff;border-radius:28px;padding:2.5rem 1.5rem;box-shadow:0 4px 24px rgba(58,170,110,0.10);text-align:center;animation:popIn 0.4s ease}
+.done-icon{font-size:4rem;display:block;margin-bottom:0.75rem}
+.done-title{font-family:'Gaegu',cursive;font-size:1.6rem;color:var(--dgreen);margin-bottom:0.5rem}
+.done-desc{font-size:13px;color:#777;line-height:1.7;margin-bottom:1.5rem}
+.done-box{background:#e8faf0;border-radius:16px;padding:16px;margin-bottom:1.2rem}
+.done-box p{font-size:14px;font-weight:800;color:var(--dgreen);line-height:1.7}
+</style>
+</head>
+<body>
+<span class="deco">🌱</span>
+<span class="deco">🍓</span>
+<span class="deco">🌿</span>
+<span class="deco">✨</span>
+<span class="deco">🌾</span>
+<span class="deco">🍅</span>
+
+<div class="wrap">
+
+  <!-- 인트로 -->
+  <div id="intro">
+    <div class="intro-card">
+      <div class="intro-emoji-wrap"><div class="intro-emoji-track"><div class="intro-emoji-row">🍓 🍋 🥒 🍈 🍆 🍅 🥬 🍊 </div><div class="intro-emoji-row">🍓 🍋 🥒 🍈 🍆 🍅 🥬 🍊 </div></div></div>
+      <span class="intro-main-emoji">🧑‍🌾</span>
+      <div class="intro-emoji-wrap"><div class="intro-emoji-track2"><div class="intro-emoji-row2">🍊 🥬 🍅 🍆 🍈 🥒 🍋 🍓 </div><div class="intro-emoji-row2">🍊 🥬 🍅 🍆 🍈 🥒 🍋 🍓 </div></div></div>
+      <div class="intro-title">스마트팜,<br>나의 시작 단계는?</div>
+      <div class="intro-divider"></div>
+      <div class="intro-sub">
+        <strong>전공 무관, 경험 무관!</strong><br>
+        8가지 질문으로 나에게 딱 맞는<br>
+        스마트팜 교육을 찾아봐요 🌿
+      </div>
+      <button class="btn-start" onclick="startQuiz()">👆 테스트 시작하기</button>
+      <div class="intro-footer">약 2분 소요 · 8문항</div>
+    </div>
+  </div>
+
+  <!-- 퀴즈 -->
+  <div id="quiz" style="display:none">
+    <div class="quiz-header" id="quiz-header">
+      <h2>스마트팜, 나의 시작 단계는?</h2>
+      <p>전공 무관, 경험 무관! 나에게 딱 맞는 교육을 찾아봐요</p>
+    </div>
+    <div class="prog-wrap">
+      <div class="prog-track"><div class="prog-bar" id="prog" style="width:0%"></div></div>
+      <div class="prog-label" id="prog-label">1 / 8</div>
+    </div>
+    <div class="card" id="qcard">
+      <span class="q-emoji" id="q-emoji"></span>
+      <div class="q-text" id="q-text"></div>
+      <div class="options" id="options"></div>
+    </div>
+  </div>
+
+  <!-- 결과 -->
+  <div id="result">
+    <div class="result-card">
+      <span class="result-character" id="r-char"></span>
+      <div class="result-type-badge" id="r-badge"></div>
+      <div class="result-label" id="r-label"></div>
+      <div class="result-dna-label">나의 농업 준비도</div>
+      <div class="result-pct" id="r-pct">0<span>%</span></div>
+      <div class="gauge-wrap">
+        <div class="gauge-track"><div class="gauge-fill" id="r-gauge" style="width:0%"></div></div>
+      </div>
+      <div class="result-section">
+        <div class="result-section-title">✦ 당신은 이런 타입이에요</div>
+        <p id="r-desc"></p>
+      </div>
+      <div class="result-rec-box">
+        <div class="result-rec-title">✦ 추천 교육</div>
+        <div class="result-rec-name" id="r-rec-name"></div>
+        <div class="result-rec-desc" id="r-rec-desc"></div>
+      </div>
+      <button class="btn-cta" id="btn-naver" onclick="goNaver()">📧 소식 받고 기념품 받기</button>
+      <button class="btn-retry" onclick="retry()">🔄 다시 해보기</button>
+    </div>
+    <div class="footer-badge">
+      <strong>AFPRO 2026 × 스마트농업육성관</strong>
+    </div>
+  </div>
+
+  <!-- 완료 -->
+  <div id="done-screen">
+    <div class="done-card">
+      <span class="done-icon">🎉</span>
+      <div class="done-title">신청 완료!</div>
+      <div class="done-desc">소식 받기 신청해주셔서 감사해요 🌱<br>스마트팜의 세계에서 만나요!</div>
+      <div class="done-box">
+        <p>📱 이 화면을 부스 스태프에게<br>보여주시면 기념품을 드려요 🎁</p>
+      </div>
+      <button class="btn-retry" onclick="retry()">🔄 처음부터 다시하기</button>
+    </div>
+    <div class="footer-badge">
+      <strong>AFPRO 2026 × 스마트농업육성관</strong>
+    </div>
+  </div>
+</div>
+
+<script>
+const NAVER_FORM_URL = 'https://naver.me/GFsoR3Jv';
+
+const qs = [
+  {
+    emoji:"🌱", axis:"A",
+    text:"친구가\n\"나 농업 한번 시작해보려고 하는데,\n같이 해볼래?\" 라고 했다.\n나의 반응은?",
+    opts:[
+      {e:"😤",t:"솔직히 아직 엄두가 안 난다",a:0},
+      {e:"🤔",t:"좀 더 알아보고 결정할게",a:1},
+      {e:"😮",t:"재밌겠는데... 나는 좀 더 생각해볼게",a:1},
+      {e:"🙋",t:"언제 시작해? 나도 낄게!",a:2},
+    ]
+  },
+  {
+    emoji:"💭", axis:"B",
+    text:"스마트팜에 대해\n어떻게 생각해?",
+    opts:[
+      {e:"😅",t:"잘 모르겠어, 오늘 처음 들어봤어",b:0},
+      {e:"🤨",t:"들어본 것 같긴 한데, 잘 모르겠어",b:1},
+      {e:"👀",t:"관심은 있었는데 자세히 알아본 적은 없어",b:1},
+      {e:"🔥",t:"진짜 해보고 싶다고 생각했어!",b:2},
+    ]
+  },
+  {
+    emoji:"🌧️", axis:"A",
+    text:"열심히 준비한 게\n한방에 망했다.\n나는?",
+    opts:[
+      {e:"🛋️",t:"한동안 그 생각만 난다",a:0},
+      {e:"😢",t:"하루 이틀 앓다가 다시 일어난다",a:1},
+      {e:"🔍",t:"왜 망했는지 분석부터 한다",a:1},
+      {e:"💪",t:"다시 하면 되지 뭐, 하고 바로 털어낸다",a:2},
+    ]
+  },
+  {
+    emoji:"📆", axis:"B",
+    text:"스마트팜 교육,\n어느 정도까지 해볼 수 있어?",
+    opts:[
+      {e:"🍓",t:"모르겠고, 딸기나 먹어야겠다",b:0},
+      {e:"👀",t:"부담없이 맛보기 정도가 좋다",b:1},
+      {e:"📚",t:"시간이 걸려도 끝까지 해볼 수 있다",b:1},
+      {e:"🏆",t:"20개월, 제대로 배우고 싶다",b:2},
+    ]
+  },
+  {
+    emoji:"🔥", axis:"A",
+    text:"낯선 곳에\n혼자 던져졌다.\n나는?",
+    opts:[
+      {e:"🏠",t:"집에 가고 싶다",a:0},
+      {e:"🤝",t:"아는 사람 한 명만 있으면 괜찮다",a:1},
+      {e:"🐢",t:"시간이 걸려도 결국 잘 적응한다",a:1},
+      {e:"😎",t:"오히려 신나고 적응 빠른 편이다",a:2},
+    ]
+  },
+  {
+    emoji:"🏡", axis:"B",
+    text:"5년 후 내 모습,\n솔직히 어떤 게 제일 끌려?",
+    opts:[
+      {e:"🔮",t:"5년 후... 일단 내일부터 생각할게",b:0},
+      {e:"🌿",t:"자연 속에서 여유롭게 살고 있다",b:1},
+      {e:"💼",t:"스마트팜 관련 일을 하고 있다",b:1},
+      {e:"🌾",t:"내 농장에서 직접 수확하고 있다",b:2},
+    ]
+  },
+  {
+    emoji:"⏰", axis:"A",
+    text:"하기 싫어도\n꾸준히 해야 할 때 나는?",
+    opts:[
+      {e:"🏳️",t:"중간에 한 번쯤은 포기한다 (솔직히)",a:0},
+      {e:"😤",t:"힘들지만 어떻게든 한다",a:1},
+      {e:"📅",t:"루틴으로 만들어서 습관화한다",a:2},
+      {e:"🎯",t:"목표 생각하면서 버틴다",a:2},
+    ]
+  },
+  {
+    emoji:"💭", axis:"B",
+    text:"농업으로 뭔가 해본다면,\n어떤 모습을 기대해?",
+    opts:[
+      {e:"🤷",t:"아직 잘 모르겠다",b:0},
+      {e:"🌱",t:"일단 내가 직접 뭔가 키워보고 싶다",b:1},
+      {e:"📖",t:"농업에 대해 제대로 배우고 싶다",b:1},
+      {e:"🚀",t:"배운 걸 바탕으로 나만의 길을 만들고 싶다",b:2},
+    ]
+  },
+];
+
+// 매번 선택지 순서 섞기
+function shuffleOpts(opts){
+  const arr=[...opts];
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+
+const results = [
+  {
+    key:"농업 입문자", char:"🌱",
+    badgeBg:"#e8faf0", badgeTc:"#1e7a4a",
+    pct:20, label:"아직 낯설어도 괜찮아요!\n모든 농부는 처음엔 씨앗이었으니까요",
+    desc:"농업이 낯설고 멀게 느껴지는 단계예요.\n하지만 낯섦은 가능성의 다른 이름이에요.\n\n처음엔 누구나 흙 한 번 안 만져봤거든요.\n스마트팜은 전공도, 경험도 필요 없어요.\n필요한 건 딱 하나, 시작하려는 마음 🌱",
+    recName:"스마트팜 현장실습형 교육",
+    recDesc:"부담없이 맛보기부터 시작해봐요!\n짧은 교육으로 스마트팜을 직접 경험할 수 있어요 🌿"
+  },
+  {
+    key:"농업 탐색자", char:"🔍",
+    badgeBg:"#e8f4ff", badgeTc:"#1a6099",
+    pct:45, label:"관심은 있는데 확신이 없는 단계!\n고민하는 사이 누군가는 수확했답니다 😏",
+    desc:"\"나 같은 사람도 될 수 있을까?\"\n정답을 말해드리면, 됩니다 🌿\n\n오히려 아무것도 모르는 상태에서 시작한 사람이\n더 빠르게 성장하는 경우가 많거든요.\n그 확신은 직접 경험하면서 생기는 거예요!",
+    recName:"스마트팜 현장실습형 교육",
+    recDesc:"현장실습 수료하면\n스마트팜 청년창업 보육센터 지원 시 가점까지! 👍"
+  },
+  {
+    key:"농업 준비자", char:"💪",
+    badgeBg:"#ffe0e8", badgeTc:"#c0395a",
+    pct:72, label:"도전 의지, 관심, 실행력까지!\n이 정도면 지원 안 하는 게 더 이상해요 😏",
+    desc:"스마트팜에 필요한 게 딱 이 세 가지거든요.\n\n농업 전공 아니어도 괜찮아요.\n흙 한 번 안 만져봤어도 괜찮아요.\n이 마음가짐만 있으면 이미 반은 온 거예요 🍓",
+    recName:"스마트팜 현장실습형 교육 → 스마트팜 청년창업 보육센터",
+    recDesc:"현장실습으로 가점 챙기고\n스마트팜 청년창업 보육센터 20개월 풀코스까지 노려봐요! 🚀"
+  },
+  {
+    key:"농업 도전자", char:"🚀",
+    badgeBg:"#fff3b0", badgeTc:"#a07800",
+    pct:96, label:"열정도, 방향도, 실행력도 준비 완료!\n근데 왜 아직 지원 안 하셨어요? 😄",
+    desc:"축하해요, 당신은 이미 청년 농부예요 🏆\n열정도, 방향도, 실행력도 모두 준비 완료!\n\n20개월 후 본인 농장에서 수확하는 모습이\n눈에 선하게 그려지는 유형이에요.",
+    recName:"스마트팜 청년창업 보육센터",
+    recDesc:"전공 무관, 경험 무관! 국비 100% 지원\n지금이 딱 최고의 타이밍이에요 🌾"
+  },
+];
+
+let cur=0, scoresA=[], scoresB=[], shuffledOpts=[];
+
+function startQuiz(){
+  document.getElementById('intro').style.display='none';
+  document.getElementById('quiz').style.display='block';
+  document.getElementById('quiz-header').style.display='block';
+  // 각 문항 선택지 미리 섞기
+  shuffledOpts = qs.map(q=>shuffleOpts(q.opts));
+  renderQ();
+}
+
+function renderQ(){
+  const q=qs[cur];
+  const opts=shuffledOpts[cur];
+  document.getElementById('q-emoji').textContent=q.emoji;
+  document.getElementById('q-text').textContent=q.text;
+  document.getElementById('prog').style.width=((cur)/8*100)+'%';
+  document.getElementById('prog-label').textContent=(cur+1)+' / 8';
+  const el=document.getElementById('options');
+  el.innerHTML='';
+  opts.forEach((o)=>{
+    const btn=document.createElement('button');
+    btn.className='opt';
+    btn.innerHTML=`<span class="opt-emoji">${o.e}</span>${o.t}`;
+    btn.addEventListener('click',()=>pick(q.axis,o,btn));
+    el.appendChild(btn);
+  });
+  const card=document.getElementById('qcard');
+  card.style.animation='none';
+  void card.offsetWidth;
+  card.style.animation='popIn 0.35s cubic-bezier(.4,0,.2,1)';
+}
+
+function pick(axis,o,btn){
+  document.querySelectorAll('.opt').forEach(b=>b.classList.remove('picked'));
+  btn.classList.add('picked');
+  if(axis==='A') scoresA[cur]=o.a||0;
+  else scoresB[cur]=o.b||0;
+  setTimeout(()=>{
+    cur++;
+    if(cur<8){renderQ();}
+    else{showResult();}
+  },320);
+}
+
+function showResult(){
+  document.getElementById('quiz').style.display='none';
+  const totalA=scoresA.reduce((a,b)=>a+(b||0),0);
+  const totalB=scoresB.reduce((a,b)=>a+(b||0),0);
+  const pctA=totalA/8;
+  const pctB=totalB/8;
+  let r;
+  if(pctA>=0.5&&pctB>=0.5) r=results[3];
+  else if(pctA<0.5&&pctB>=0.5) r=results[1];
+  else if(pctA>=0.5&&pctB<0.5) r=results[2];
+  else r=results[0];
+
+  const charEl=document.getElementById('r-char');
+  charEl.textContent=r.char;
+  charEl.className='result-character '+r.animClass;
+  const badge=document.getElementById('r-badge');
+  badge.textContent=r.key;
+  badge.style.background=r.badgeBg;
+  badge.style.color=r.badgeTc;
+  document.getElementById('r-label').textContent=r.label;
+  document.getElementById('r-desc').textContent=r.desc;
+  document.getElementById('r-rec-name').textContent=r.recName;
+  document.getElementById('r-rec-desc').textContent=r.recDesc;
+
+  const pctEl=document.getElementById('r-pct');
+  let n=0;
+  const tick=setInterval(()=>{
+    n=Math.min(n+Math.ceil(r.pct/30),r.pct);
+    pctEl.innerHTML=n+'<span>%</span>';
+    if(n>=r.pct)clearInterval(tick);
+  },30);
+
+  document.getElementById('result').style.display='block';
+  setTimeout(()=>{document.getElementById('r-gauge').style.width=r.pct+'%';},200);
+  window.scrollTo(0,0);
+}
+
+function goNaver(){
+  const a=document.createElement('a');
+  a.href=NAVER_FORM_URL;
+  a.target='_blank';
+  a.rel='noopener noreferrer';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function retry(){
+  cur=0;scoresA=[];scoresB=[];shuffledOpts=[];
+  ['result','done-screen'].forEach(id=>{document.getElementById(id).style.display='none';});
+  document.getElementById('r-gauge').style.width='0%';
+  document.getElementById('intro').style.display='block';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
